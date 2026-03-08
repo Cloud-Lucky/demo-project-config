@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: be-fe-app
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  sources:
+
+    - repoURL: https://github.com/Cloud-Lucky/demo-frontend-config.git
+      path: argo
+      targetRevision: HEAD
+
+    - repoURL: https://github.com/Cloud-Lucky/demo-backend-config.git 
+      path: argo
+      targetRevision: HEAD
+
+  syncPolicy:
+    automated:
+     prune: true
+     selfHeal: true
+
+
+
+    
